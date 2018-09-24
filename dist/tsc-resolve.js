@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -33,26 +34,27 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-import * as path from "path";
+Object.defineProperty(exports, "__esModule", { value: true });
+var path = require("path");
 var tsconfig = require("tsconfig");
-import { CONFIG_FILENAME, convertToUnixPath, endsWith, escapeRegExp, getJSFiles, replaceInFile, rtrim, validateTsConfig } from "./utils";
+var utils_1 = require("./utils");
 function getFileReplaceTask(outDir, filePath, modules) {
     var replaces = [];
     for (var _i = 0, modules_1 = modules; _i < modules_1.length; _i++) {
         var module_1 = modules_1[_i];
         var moduleDir = path.resolve(outDir, module_1.path);
         var diff = path.relative(path.resolve(moduleDir, path.dirname(filePath)), moduleDir);
-        diff = convertToUnixPath(diff);
+        diff = utils_1.convertToUnixPath(diff);
         if (!(diff.lastIndexOf(".", 0) === 0)) {
             diff = "./" + diff;
         }
-        var regExp1 = new RegExp(escapeRegExp("require(\"" + module_1.name + "\")"), "g");
+        var regExp1 = new RegExp(utils_1.escapeRegExp("require(\"" + module_1.name + "\")"), "g");
         var replaceText1 = "require(\"" + diff + "\")";
-        var regExp2 = new RegExp(escapeRegExp("require(\"" + module_1.name + "/"), "g");
+        var regExp2 = new RegExp(utils_1.escapeRegExp("require(\"" + module_1.name + "/"), "g");
         var replaceText2 = "require(\"" + diff;
-        var regExp3 = new RegExp(escapeRegExp("require('" + module_1.name + "')"), "g");
+        var regExp3 = new RegExp(utils_1.escapeRegExp("require('" + module_1.name + "')"), "g");
         var replaceText3 = "require('" + diff + "')";
-        var regExp4 = new RegExp(escapeRegExp("require('" + module_1.name + "/"), "g");
+        var regExp4 = new RegExp(utils_1.escapeRegExp("require('" + module_1.name + "/"), "g");
         var replaceText4 = "require('" + diff;
         if (diff !== "./") {
             replaceText2 += "/";
@@ -63,23 +65,23 @@ function getFileReplaceTask(outDir, filePath, modules) {
         replaces.push({ regExp: regExp3, text: replaceText3 });
         replaces.push({ regExp: regExp4, text: replaceText4 });
     }
-    return replaceInFile(filePath, replaces);
+    return utils_1.replaceInFile(filePath, replaces);
 }
-export function resolve(tsConfigFilePath) {
+function resolve(tsConfigFilePath) {
     return __awaiter(this, void 0, void 0, function () {
         var config, outDir, jsFiles, modules;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    if (!endsWith(tsConfigFilePath, ".json")) {
-                        tsConfigFilePath = path.join(tsConfigFilePath, CONFIG_FILENAME);
+                    if (!utils_1.endsWith(tsConfigFilePath, ".json")) {
+                        tsConfigFilePath = path.join(tsConfigFilePath, utils_1.CONFIG_FILENAME);
                     }
                     return [4 /*yield*/, tsconfig.readFile(tsConfigFilePath)];
                 case 1:
                     config = _a.sent();
-                    validateTsConfig(config);
+                    utils_1.validateTsConfig(config);
                     outDir = path.resolve(path.dirname(tsConfigFilePath), config.compilerOptions.outDir);
-                    jsFiles = getJSFiles(outDir);
+                    jsFiles = utils_1.getJSFiles(outDir);
                     if (!jsFiles.length) {
                         throw new Error("No .js files found");
                     }
@@ -88,7 +90,7 @@ export function resolve(tsConfigFilePath) {
                             var tsModules = [];
                             for (var _i = 0, modules_2 = modules; _i < modules_2.length; _i++) {
                                 var moduleName = modules_2[_i];
-                                var modulePath = rtrim(config.compilerOptions.paths[moduleName][0], "*"); // Remove trailing *s
+                                var modulePath = utils_1.rtrim(config.compilerOptions.paths[moduleName][0], "*"); // Remove trailing *s
                                 tsModules.push({ name: moduleName.replace("/*", ""), path: modulePath });
                             }
                             return getFileReplaceTask(outDir, filePath, tsModules);
@@ -100,3 +102,4 @@ export function resolve(tsConfigFilePath) {
         });
     });
 }
+exports.resolve = resolve;

@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -33,12 +34,13 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-import * as Bluebird from "bluebird";
-import * as path from "path";
+Object.defineProperty(exports, "__esModule", { value: true });
+var Bluebird = require("bluebird");
+var path = require("path");
 var gracefulFs = require("graceful-fs");
 var fs = Bluebird.promisifyAll(gracefulFs.gracefulify(require("fs")));
-export var CONFIG_FILENAME = "tsconfig.json";
-export function getJSFiles(dir, files) {
+exports.CONFIG_FILENAME = "tsconfig.json";
+function getJSFiles(dir, files) {
     if (files === void 0) { files = []; }
     for (var _i = 0, _a = fs.readdirSync(dir); _i < _a.length; _i++) {
         var file = _a[_i];
@@ -55,7 +57,8 @@ export function getJSFiles(dir, files) {
     }
     return files;
 }
-export function replaceInFile(filePath, replaces) {
+exports.getJSFiles = getJSFiles;
+function replaceInFile(filePath, replaces) {
     return __awaiter(this, void 0, void 0, function () {
         var newSource, _i, replaces_1, replace;
         return __generator(this, function (_a) {
@@ -75,7 +78,8 @@ export function replaceInFile(filePath, replaces) {
         });
     });
 }
-export function rtrim(str, char) {
+exports.replaceInFile = replaceInFile;
+function rtrim(str, char) {
     if (str.slice(str.length - char.length) === char) {
         return rtrim(str.slice(0, 0 - char.length), char);
     }
@@ -83,13 +87,15 @@ export function rtrim(str, char) {
         return str;
     }
 }
-export function escapeRegExp(expr) {
+exports.rtrim = rtrim;
+function escapeRegExp(expr) {
     if (typeof expr !== "string") {
         throw new TypeError("Expected a string");
     }
     return expr.replace(/[|\\{}()[\]^$+*?.]/g, "\\$&");
 }
-export function convertToUnixPath(path) {
+exports.escapeRegExp = escapeRegExp;
+function convertToUnixPath(path) {
     var isExtendedLengthPath = /^\\\\\?\\/.test(path);
     var hasNonAscii = /[^\x00-\x80]+/.test(path);
     if (isExtendedLengthPath || hasNonAscii) {
@@ -97,7 +103,8 @@ export function convertToUnixPath(path) {
     }
     return path.replace(/\\/g, "/");
 }
-export function validateTsConfig(config) {
+exports.convertToUnixPath = convertToUnixPath;
+function validateTsConfig(config) {
     if (!config.compilerOptions) {
         throw new Error("Missing compilerOptions");
     }
@@ -116,6 +123,8 @@ export function validateTsConfig(config) {
         }
     }
 }
-export function endsWith(str, suffix) {
+exports.validateTsConfig = validateTsConfig;
+function endsWith(str, suffix) {
     return str.indexOf(suffix, str.length - suffix.length) !== -1;
 }
+exports.endsWith = endsWith;

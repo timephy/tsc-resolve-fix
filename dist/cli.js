@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -35,11 +36,12 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 var _this = this;
-import * as Bluebird from "bluebird";
-import * as path from "path";
+Object.defineProperty(exports, "__esModule", { value: true });
+var Bluebird = require("bluebird");
+var path = require("path");
 global.Promise = Bluebird; // only for CLI usage
 var yargs = require("yargs");
-import { resolve } from "./tsc-resolve";
+var tsc_resolve_1 = require("./tsc-resolve");
 var USAGE = "\nUSAGE:\n    tsc-resolve\n    tsc-resolve -p tsconfig.prod.json\n    tsc-resolve -p ./conf/tsconfig.dev.json\n    tsc-resolve -p ./conf/\n    tsc-resolve -p ../\n";
 var argv = yargs
     .usage(USAGE)
@@ -61,7 +63,7 @@ var tsConfigPath = path.resolve(process.cwd(), argv.p);
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, resolve(tsConfigPath)];
+                return [4 /*yield*/, tsc_resolve_1.resolve(tsConfigPath)];
             case 1:
                 _a.sent();
                 return [3 /*break*/, 3];
