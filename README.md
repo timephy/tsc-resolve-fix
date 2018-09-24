@@ -78,10 +78,10 @@ The old version only allowed for one non-relative path to resolve to one file/di
 ## Installation
 ```bash
 # Local package
-$ npm i tsc-resolve --save-dev
+$ npm i timephy/tsc-resolve-fix --save-dev
 
 # Global CLI
-$ npm i -g tsc-resolve 
+$ npm i -g timephy/tsc-resolve-fix 
 ```
 
 ## Usage
@@ -100,6 +100,7 @@ $ npm run build
 ```bash
 $ npm i -g tsc-resolve
 
+$ ./node_module/.bin/tsc-resolve
 $ tsc-resolve
 $ tsc-resolve -p tsconfig.prod.json
 $ tsc-resolve -p ./conf/tsconfig.dev.json
