@@ -3,7 +3,7 @@
 
 This package resolves non-relative imports to their relative path.
 This was possible with "tsc-resolve" by Dimitar Mazhlekov, but in his version it was not possible to do the following:
-```json
+```typescript
 // tsconfig.json
 "paths": {
     "@util/*": [
