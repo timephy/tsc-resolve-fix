@@ -5,14 +5,14 @@ This package resolves non-relative imports to their relative path.
 This was possible with "tsc-resolve" by Dimitar Mazhlekov, but in his version it was not possible to do the following:
 ```
 // tsconfig.json
-    "paths": {
-        "@util/*": [
-            "util/*"
-        ]
-    }
+"paths": {
+    "@util/*": [
+        "util/*"
+    ]
+}
 
 // index.js
-    import * as someUtility from "@utils/someUtility";
+import * as someUtility from "@utils/someUtility";
 ```
 With this package you can resolve further paths (e.g. "someUtility") after the non-relative path (e.g. "@util").
 The old version only allowed for one non-relative path to resolve to one file/directory.
