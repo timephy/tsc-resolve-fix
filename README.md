@@ -1,4 +1,4 @@
-# tsc-resolve 
+# tsc-resolve-fix 
 ## A tool for resolving typescript modules defined in tsconfig.json 
 
 This package resolves non-relative imports to their relative path.
