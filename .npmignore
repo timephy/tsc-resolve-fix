@@ -1,7 +1,0 @@
-src/
-yarn.lock
-tsconfig.json
-tslint.json
-.npmignore
-.editorconfig
-.gitattributes

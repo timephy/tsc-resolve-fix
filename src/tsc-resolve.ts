@@ -64,7 +64,7 @@ export async function resolve(tsConfigFilePath: string) {
             const tsModules: ITypescriptModule[] = [];
             for (const moduleName of modules) {
                 const modulePath = rtrim(config.compilerOptions.paths[moduleName][0], "*"); // Remove trailing *s
-                tsModules.push({ name: moduleName, path: modulePath });
+                tsModules.push({ name: moduleName.replace("/*", ""), path: modulePath });
             }
             return getFileReplaceTask(outDir, filePath, tsModules);
         })
